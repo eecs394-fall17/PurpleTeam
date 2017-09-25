@@ -7,21 +7,29 @@ import { NavController, AlertController, ActionSheetController } from 'ionic-ang
   templateUrl: 'home.html'
 })
 export class HomePage {
-  songs: FirebaseListObservable<any>;
+  requests: FirebaseListObservable<any>;
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
               public actionSheetCtrl: ActionSheetController, db: AngularFireDatabase) {
-    this.songs = db.list('/songs');
+    this.requests = db.list('/requests');
   }
 
-  addSong(){
+  addRequest(){
     let prompt = this.alertCtrl.create({
-      title: 'Song Name',
-      message: "Enter a name for this new song you're so keen on adding",
+      title: 'New Request',
+      message: "",
       inputs: [
         {
           name: 'title',
           placeholder: 'Title'
         },
+        {
+          name: 'body',
+          placeholder: 'Request'
+        },
+        {
+          name: 'price',
+          placeholder: '5'
+        }
       ],
       buttons: [
         {
@@ -33,8 +41,8 @@ export class HomePage {
         {
           text: 'Save',
           handler: data => {
-            this.songs.push({
-              title: data.title
+            this.requests.push({
+              title: data.title, body: data.body, postTime: new Date().toString(), price: data.price
             });
           }
         }
@@ -43,16 +51,26 @@ export class HomePage {
     prompt.present();
   }
 
-  updateSong(songId, songTitle){
+  updateRequest(reqID, reqTitle, reqBody, reqPrice){
     let prompt = this.alertCtrl.create({
-      title: 'Song Name',
-      message: "Update the name for this song",
+      title: 'Request',
+      message: "Update this request",
       inputs: [
         {
           name: 'title',
           placeholder: 'Title',
-          value: songTitle
+          value: reqTitle
         },
+        {
+          name: 'body',
+          placeholder: 'Request',
+          value: reqBody
+        },
+        {
+          name: 'price',
+          placeholder: '5',
+          value: reqPrice
+        }
       ],
       buttons: [
         {
@@ -64,8 +82,8 @@ export class HomePage {
         {
           text: 'Save',
           handler: data => {
-            this.songs.update(songId, {
-              title: data.title
+            this.requests.update(reqID, {
+              title: data.title, body: data.body, price: data.price
             });
           }
         }
@@ -74,24 +92,24 @@ export class HomePage {
     prompt.present();
   }
 
-  removeSong(songId: string){
-    this.songs.remove(songId);
+  deleteRequest(songId: string){
+    this.requests.remove(songId);
   }
 
-  showOptions(songId, songTitle) {
+  showOptions(reqID, reqTitle, reqBody, reqPrice) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'What do you want to do?',
       buttons: [
         {
-          text: 'Delete Song',
+          text: 'Delete Request',
           role: 'destructive',
           handler: () => {
-            this.removeSong(songId);
+            this.deleteRequest(reqID);
           }
         },{
-          text: 'Update title',
+          text: 'Update',
           handler: () => {
-            this.updateSong(songId, songTitle);
+            this.updateRequest(reqID, reqTitle, reqBody, reqPrice);
           }
         },{
           text: 'Cancel',
