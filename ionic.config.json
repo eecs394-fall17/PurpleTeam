@@ -2,5 +2,7 @@
   "name": "PurpleTeam",
   "app_id": "c694120e",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }
