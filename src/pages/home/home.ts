@@ -13,10 +13,21 @@ export class HomePage {
   toggled: boolean;
   searchTerm: String = '';
   items: string[];
+  posts: Array<any>;
 
   constructor( public navCtrl: NavController, public alertCtrl: AlertController,
                public actionSheetCtrl: ActionSheetController, db: AngularFireDatabase,
                public navParams: NavParams ) {
+    this.posts = [];
+    for(let i = 1; i < 11; i++) {
+      this.posts.push({
+        image: 'assets/img/hathaway.jpg',
+        title: 'post ' + i,
+        note: 'hey guys, i like Anne Hathaway sooooooo much!!! Can any one tell her that i love her!!! My name is Leonardo Wilhelm DiCaprio！！' + i,
+        like: i * 10000,
+        dollar: 10000 + i
+      });
+    }
     this.requests = db.list('/requests');
     this.toggled = false;
     this.initializeItems();

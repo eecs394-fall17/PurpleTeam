@@ -14,6 +14,29 @@
 
 <ion-content padding>
 
+  <ion-list>
+    <ion-card ion-item *ngFor="let post of posts">
+      <img src="{{post.image}}"/>
+      <ion-card-content>
+        <ion-card-title>{{post.title}}</ion-card-title>
+        <p>{{post.note}}</p>
+      </ion-card-content>
+      <ion-item>
+        <ion-icon name='ios-thumbs-up' item-start style="color: #d03e84"></ion-icon>
+        Like
+        <ion-badge item-end>{{post.like}}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-icon name='logo-yen' item-start style="color: #55acee"></ion-icon>
+        Dollar
+        <ion-badge item-end>{{post.dollar}}</ion-badge>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+
+
+
   <h3>Welcome to your first Ionic app!</h3>
 
   <p>
