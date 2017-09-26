@@ -11,20 +11,22 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-list>
+    <button ion-button (click)="addRequest()">New Post</button>
+  </ion-list>
   <ion-list ion-item *ngFor="let post of requests | async" no-lines>
     <ion-card>
       <img src="assets/imgs/hathaway.jpg"/>
       <ion-card-content text-wrap>
         <ion-card-title>{{post.title}}</ion-card-title>
         <p>{{post.body}}</p>
+        <p>{{post.postTime}}</p>
       </ion-card-content>
       <ion-item>
         <ion-icon name='ios-thumbs-up' item-start style="color: #d03e84"></ion-icon>
         Like
-        <ion-badge item-end>{{post.like}}</ion-badge>
+        <ion-badge item-end>2314</ion-badge>
       </ion-item>
       <ion-item>
         <ion-icon name='logo-yen' item-start style="color: #55acee"></ion-icon>
@@ -33,35 +35,4 @@
       </ion-item>
     </ion-card>
   </ion-list>
-
-
-
-
-  <h3>Welcome to your first Ionic app!</h3>
-
-  <p>
-    This starter project is our way of helping you get a functional app running in record time.
-  </p>
-  <p>
-    Follow along on the tutorial section of the Ionic docs!
-  </p>
-  <p>
-    <button ion-button color="primary" menuToggle>Toggle Menu</button>
-  </p>
-
-  <button ion-button (click)="addRequest()">New Request</button>
-
-  <ion-list>
-    <ion-item *ngFor="let req of requests | async" (click)="showOptions(req.$key, req.title, req.body, req.price)">
-      {{req.postTime}}
-      <br/>
-      ${{req.price}}
-      <br/>
-      {{req.title}}
-      <br/>
-      {{req.body}}
-    </ion-item>
-  </ion-list>
-
-
 </ion-content>
