@@ -15,11 +15,11 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-card ion-item *ngFor="let post of posts">
-      <img src="{{post.image}}"/>
-      <ion-card-content>
+    <ion-card ion-item *ngFor="let post of requests | async">
+      <img src="assets/imgs/hathaway.jpg"/>
+      <ion-card-content text-wrap>
         <ion-card-title>{{post.title}}</ion-card-title>
-        <p>{{post.note}}</p>
+        <p>{{post.body}}</p>
       </ion-card-content>
       <ion-item>
         <ion-icon name='ios-thumbs-up' item-start style="color: #d03e84"></ion-icon>
@@ -29,7 +29,7 @@
       <ion-item>
         <ion-icon name='logo-yen' item-start style="color: #55acee"></ion-icon>
         Dollar
-        <ion-badge item-end>{{post.dollar}}</ion-badge>
+        <ion-badge item-end>{{post.price}}</ion-badge>
       </ion-item>
     </ion-card>
   </ion-list>
