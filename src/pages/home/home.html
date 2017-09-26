@@ -14,8 +14,8 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-card ion-item *ngFor="let post of requests | async">
+  <ion-list ion-item *ngFor="let post of requests | async" no-lines>
+    <ion-card>
       <img src="assets/imgs/hathaway.jpg"/>
       <ion-card-content text-wrap>
         <ion-card-title>{{post.title}}</ion-card-title>
