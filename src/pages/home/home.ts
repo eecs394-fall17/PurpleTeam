@@ -1,125 +1,42 @@
-import { Component } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { NavController, AlertController, ActionSheetController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 
 @Component({
-  selector: 'page-hello-ionic',
+  selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  requests: FirebaseListObservable<any>;
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController,
-              public actionSheetCtrl: ActionSheetController, db: AngularFireDatabase) {
-    this.requests = db.list('/requests');
+  toggled: boolean;
+  searchTerm: String = '';
+  items: string[];
+
+  constructor( public navCtrl: NavController, public navParams: NavParams ) {
+    this.toggled = false;
+    this.initializeItems();
   }
 
-  addRequest(){
-    let prompt = this.alertCtrl.create({
-      title: 'New Request',
-      message: "",
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Title'
-        },
-        {
-          name: 'body',
-          placeholder: 'Request'
-        },
-        {
-          name: 'price',
-          placeholder: '5'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            this.requests.push({
-              title: data.title, body: data.body, postTime: new Date().toString(), price: data.price
-            });
-          }
-        }
-      ]
-    });
-    prompt.present();
+  ionViewDidLoad() {
+    console.log( 'ionViewDidLoad HomePage' );
   }
 
-  updateRequest(reqID, reqTitle, reqBody, reqPrice){
-    let prompt = this.alertCtrl.create({
-      title: 'Request',
-      message: "Update this request",
-      inputs: [
-        {
-          name: 'title',
-          placeholder: 'Title',
-          value: reqTitle
-        },
-        {
-          name: 'body',
-          placeholder: 'Request',
-          value: reqBody
-        },
-        {
-          name: 'price',
-          placeholder: '5',
-          value: reqPrice
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            this.requests.update(reqID, {
-              title: data.title, body: data.body, price: data.price
-            });
-          }
-        }
-      ]
-    });
-    prompt.present();
+  toggleSearch() {
+    this.toggled = !this.toggled;
   }
 
-  deleteRequest(songId: string){
-    this.requests.remove(songId);
+  initializeItems() {
+    this.items = ['Amsterdam','Bogota','Mumbai','San José','Salvador'];
   }
 
-  showOptions(reqID, reqTitle, reqBody, reqPrice) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'What do you want to do?',
-      buttons: [
-        {
-          text: 'Delete Request',
-          role: 'destructive',
-          handler: () => {
-            this.deleteRequest(reqID);
-          }
-        },{
-          text: 'Update',
-          handler: () => {
-            this.updateRequest(reqID, reqTitle, reqBody, reqPrice);
-          }
-        },{
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+  triggerInput( ev: any ) {
+    // Reset items back to all of the items
+    this.initializeItems();
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
   }
 }
