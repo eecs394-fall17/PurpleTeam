@@ -11,6 +11,20 @@ import { BookmarkPage } from "../pages/bookmark/bookmark";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+// Import the AF2 Module
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+// AF2 Settings
+export const firebaseConfig = {
+  apiKey: "AIzaSyBiMNfzgXjYXu7aOOaUwY8bmd2JkdsprGo",
+  authDomain: "udoit-abb6f.firebaseapp.com",
+  databaseURL: "https://udoit-abb6f.firebaseio.com",
+  projectId: "udoit-abb6f",
+  storageBucket: "udoit-abb6f.appspot.com",
+  messagingSenderId: "235655215407"
+};
+
 @NgModule({
   declarations: [
     MyApp,
@@ -21,7 +35,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
