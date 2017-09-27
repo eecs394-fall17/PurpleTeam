@@ -17,21 +17,18 @@
   </ion-list>
   <ion-list ion-item *ngFor="let post of requests | async" no-lines>
     <ion-card>
-      <img src="assets/imgs/hathaway.jpg"/>
-      <ion-card-content text-wrap>
+      <ion-card-content text-wrap (click)="showOptions(post.$key)">
         <ion-card-title>{{post.title}}</ion-card-title>
-        <p>{{post.body}}</p>
-        <p>{{post.postTime}}</p>
+        <p>{{post.description}}</p>
+        <p>{{post.timestamp}}</p>
       </ion-card-content>
       <ion-item>
         <ion-icon name='ios-thumbs-up' item-start style="color: #d03e84"></ion-icon>
-        Like
-        <ion-badge item-end>2314</ion-badge>
+        <ion-badge item-end>{{post.likes}}</ion-badge>
       </ion-item>
       <ion-item>
-        <ion-icon name='logo-yen' item-start style="color: #55acee"></ion-icon>
-        Dollar
-        <ion-badge item-end>{{post.price}}</ion-badge>
+        <ion-icon name='logo-usd' item-start style="color: #55acee"></ion-icon>
+        <ion-badge item-end>{{post.value}}</ion-badge>
       </ion-item>
     </ion-card>
   </ion-list>

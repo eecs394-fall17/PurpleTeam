@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import {NavController, NavParams, AlertController, ActionSheetController} from 'ionic-angular';
+import { NavController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
+import { Post } from '../../app/Post';
 
 @Component({
   selector: 'page-home',
@@ -8,16 +9,16 @@ import {NavController, NavParams, AlertController, ActionSheetController} from '
 })
 export class HomePage {
 
-  requests: FirebaseListObservable<any>;
+  posts: FirebaseListObservable<any>;
 
   toggled: boolean;
-  searchTerm: String = '';
+  searchTerm: string = '';
   items: string[];
 
   constructor( public navCtrl: NavController, public alertCtrl: AlertController,
                public actionSheetCtrl: ActionSheetController, db: AngularFireDatabase,
                public navParams: NavParams ) {
-    this.requests = db.list('/requests');
+    this.posts = db.list('/posts');
     this.toggled = false;
     this.initializeItems();
   }
@@ -53,31 +54,28 @@ export class HomePage {
       message: "",
       inputs: [
         {
-          name: 'title',
-          placeholder: 'Title'
-        },
-        {
-          name: 'body',
+          name: 'description',
           placeholder: 'Request'
         },
         {
-          name: 'price',
-          placeholder: '5'
+          name: 'value',
+          placeholder: '$'
         }
       ],
       buttons: [
         {
           text: 'Cancel',
-          handler: data => {
+          handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
           text: 'Save',
           handler: data => {
-            this.requests.push({
-              title: data.title, body: data.body, postTime: new Date().toString(), price: data.price
-            });
+            let p = new Post("");
+            p.description = data.description;
+            p.value = data.value;
+            this.posts.push(p);
           }
         }
       ]
@@ -85,39 +83,32 @@ export class HomePage {
     prompt.present();
   }
 
-  updateRequest(reqID, reqTitle, reqBody, reqPrice){
+  updateRequest(reqID){
     let prompt = this.alertCtrl.create({
       title: 'Request',
       message: "Update this request",
       inputs: [
         {
-          name: 'title',
-          placeholder: 'Title',
-          value: reqTitle
+          name: 'description',
+          placeholder: 'Request'
         },
         {
-          name: 'body',
-          placeholder: 'Request',
-          value: reqBody
-        },
-        {
-          name: 'price',
-          placeholder: '5',
-          value: reqPrice
+          name: 'value',
+          placeholder: '$'
         }
       ],
       buttons: [
         {
           text: 'Cancel',
-          handler: data => {
+          handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
           text: 'Save',
           handler: data => {
-            this.requests.update(reqID, {
-              title: data.title, body: data.body, price: data.price
+            this.posts.update(reqID, {
+              description: data.description, value: data.value
             });
           }
         }
@@ -127,10 +118,10 @@ export class HomePage {
   }
 
   deleteRequest(songId: string){
-    this.requests.remove(songId);
+    this.posts.remove(songId);
   }
 
-  showOptions(reqID, reqTitle, reqBody, reqPrice) {
+  showOptions(reqID) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'What do you want to do?',
       buttons: [
@@ -143,7 +134,7 @@ export class HomePage {
         },{
           text: 'Update',
           handler: () => {
-            this.updateRequest(reqID, reqTitle, reqBody, reqPrice);
+            this.updateRequest(reqID);
           }
         },{
           text: 'Cancel',

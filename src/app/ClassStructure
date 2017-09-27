@@ -1,0 +1,33 @@
+{
+    post: {
+        id: string,
+        timestamp: long,
+        authorId: string,
+        description: string,
+        images: [img: binary],
+        likes: int,
+        contribution: [con-id: string],
+        value: int,
+    },
+    contribution: {
+        id: string,
+        timestamp: long,
+        post: string,
+        user: string,
+        money: double
+    },
+    user: {
+        id: string,
+        username: string,
+        password: string,
+        avatar: binary
+        money: double,
+        bookmark: [post-id: string]
+    },
+    comment: {
+        id: string,
+        timestamp: long,
+        author: string,
+        content: string
+    }
+}
