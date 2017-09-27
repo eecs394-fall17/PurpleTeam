@@ -126,15 +126,15 @@ export class HomePage {
       title: 'What do you want to do?',
       buttons: [
         {
-          text: 'Delete Request',
-          role: 'destructive',
-          handler: () => {
-            this.deleteRequest(reqID);
-          }
-        },{
           text: 'Update',
           handler: () => {
             this.updateRequest(reqID);
+          }
+        },{
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => {
+            this.deleteRequest(reqID);
           }
         },{
           text: 'Cancel',
@@ -146,5 +146,9 @@ export class HomePage {
       ]
     });
     actionSheet.present();
+  }
+
+  like(reqID) {
+    // this.posts.update(reqID, {likes: this.posts[reqID] + 1})
   }
 }
