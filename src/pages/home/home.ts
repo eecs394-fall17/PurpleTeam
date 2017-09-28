@@ -35,7 +35,8 @@ export class HomePage {
         },
         {
           name: 'value',
-          placeholder: '$'
+          placeholder: '$',
+          value: '0'
         }
       ],
       buttons: [
@@ -59,18 +60,20 @@ export class HomePage {
     prompt.present();
   }
 
-  updateRequest(reqID) {
+  updateRequest(reqID, reqDescription, reqValue) {
     let prompt = this.alertCtrl.create({
       title: 'Request',
       message: "Update this request",
       inputs: [
         {
           name: 'description',
-          placeholder: 'Request'
+          placeholder: 'Request',
+          value: reqDescription
         },
         {
           name: 'value',
-          placeholder: '$'
+          placeholder: '$',
+          value: reqValue
         }
       ],
       buttons: [
@@ -97,32 +100,32 @@ export class HomePage {
     this.posts.remove(songId);
   }
 
-  showOptions(reqID) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'What do you want to do?',
-      buttons: [
-        {
-          text: 'Update',
-          handler: () => {
-            this.updateRequest(reqID);
-          }
-        }, {
-          text: 'Delete',
-          role: 'destructive',
-          handler: () => {
-            this.deleteRequest(reqID);
-          }
-        }, {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
+  // showOptions(reqID) {
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     title: 'What do you want to do?',
+  //     buttons: [
+  //       {
+  //         text: 'Update',
+  //         handler: () => {
+  //           this.updateRequest(reqID);
+  //         }
+  //       }, {
+  //         text: 'Delete',
+  //         role: 'destructive',
+  //         handler: () => {
+  //           this.deleteRequest(reqID);
+  //         }
+  //       }, {
+  //         text: 'Cancel',
+  //         role: 'cancel',
+  //         handler: () => {
+  //           console.log('Cancel clicked');
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   actionSheet.present();
+  // }
 
   like(reqID) {
     let l = 0;

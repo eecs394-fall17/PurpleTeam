@@ -8,19 +8,27 @@
   <button ion-button block large (click)="addRequest()">New Post</button>
   <ion-list ion-item *ngFor="let post of posts | async" no-lines>
     <ion-card>
-      <ion-card-content text-wrap (click)="showOptions(post.$key)">
+      <ion-card-content text-wrap (click)="updateRequest(post.$key, post.description, post.value)">
         <ion-card-title>Author<!-- TODO: author of post --></ion-card-title>
-        <p>Posted {{howLongAgo(post.timestamp)}}</p>
-        <h1>{{post.description}}</h1>
+        <div style="float:left">
+          <p>Posted {{howLongAgo(post.timestamp)}}</p>
+          <h1>{{post.description}}</h1>
+        </div>
+        <div style="float:right">
+          <ion-item>
+            <ion-icon name='ios-thumbs-up' item-start (click)="like(post.$key)" style="color: #d03e84"></ion-icon>
+            <ion-badge>{{post.likes}}</ion-badge>
+
+          </ion-item>
+          <ion-item>
+            <ion-icon name='logo-usd' item-start (click)="updateRequest(post.$key, post.description, post.value)"
+                      style="color: #55acee"></ion-icon>
+            <ion-badge>{{post.value}}</ion-badge>
+          </ion-item>
+        </div>
       </ion-card-content>
-      <ion-item>
-        <ion-icon name='ios-thumbs-up' item-start (click)="like(post.$key)" style="color: #d03e84"></ion-icon>
-        <ion-badge item-end>{{post.likes}}</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-icon name='logo-usd' item-start (click)="showOptions(post.$key)" style="color: #55acee"></ion-icon>
-        <ion-badge item-end>{{post.value}}</ion-badge>
-      </ion-item>
+
+
     </ion-card>
   </ion-list>
 </ion-content>
