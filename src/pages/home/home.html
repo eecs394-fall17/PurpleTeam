@@ -11,7 +11,7 @@
       <ion-card-content text-wrap (click)="showOptions(post.$key)">
         <ion-card-title>Author<!-- TODO: author of post --></ion-card-title>
         <p>Posted {{howLongAgo(post.timestamp)}}</p>
-        <p>{{post.description}}</p>
+        <h1>{{post.description}}</h1>
       </ion-card-content>
       <ion-item>
         <ion-icon name='ios-thumbs-up' item-start (click)="like(post.$key)" style="color: #d03e84"></ion-icon>

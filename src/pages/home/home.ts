@@ -125,7 +125,9 @@ export class HomePage {
   }
 
   like(reqID) {
-    // this.posts.update(reqID, {likes: this.posts[reqID] + 1})
+    let l = 0;
+    this.firebaseService.afdb.object('/posts/' + reqID).subscribe(post => l = post.likes);
+    this.posts.update(reqID, {likes: l + 1});
   }
 
   howLongAgo(timestamp) {
