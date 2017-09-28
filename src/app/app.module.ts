@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
 
+import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
@@ -11,9 +11,12 @@ import { BookmarkPage } from "../pages/bookmark/bookmark";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-// Import the AF2 Module
+import { HttpModule } from "@angular/http";
+import { Camera } from "@ionic-native/camera";
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { FirebaseService } from "../providers/firebase-service";
+import { FileService } from "../providers/file-service";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -35,6 +38,7 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule
@@ -50,6 +54,9 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
+    FirebaseService,
+    FileService,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })

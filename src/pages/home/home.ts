@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { NavController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
-import { Post } from '../../app/Post';
+import {Component} from '@angular/core';
+import {FirebaseListObservable} from 'angularfire2/database';
+import {ActionSheetController, AlertController, NavController, NavParams} from 'ionic-angular';
+import {Post} from '../../app/Post';
+import {FirebaseService} from "../../providers/firebase-service";
 
 @Component({
   selector: 'page-home',
@@ -9,46 +10,20 @@ import { Post } from '../../app/Post';
 })
 export class HomePage {
 
-  posts: FirebaseListObservable<any>;
+  posts: FirebaseListObservable<any[]>;
 
-  toggled: boolean;
-  searchTerm: string = '';
-  items: string[];
-
-  constructor( public navCtrl: NavController, public alertCtrl: AlertController,
-               public actionSheetCtrl: ActionSheetController, db: AngularFireDatabase,
-               public navParams: NavParams ) {
-    this.posts = db.list('/posts');
-    this.toggled = false;
-    this.initializeItems();
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController,
+              public actionSheetCtrl: ActionSheetController,
+              public firebaseService: FirebaseService,
+              public navParams: NavParams) {
+    this.posts = this.firebaseService.getPosts();
   }
 
   ionViewDidLoad() {
-    console.log( 'ionViewDidLoad HomePage' );
+    console.log('ionViewDidLoad HomePage');
   }
 
-  toggleSearch() {
-    this.toggled = !this.toggled;
-  }
-
-  initializeItems() {
-    this.items = ['Amsterdam','Bogota','Mumbai','San José','Salvador'];
-  }
-
-  triggerInput( ev: any ) {
-    // Reset items back to all of the items
-    this.initializeItems();
-    // set val to the value of the searchbar
-    let val = ev.target.value;
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }
-  }
-
-  addRequest(){
+  addRequest() {
     let prompt = this.alertCtrl.create({
       title: 'New Request',
       message: "",
@@ -83,7 +58,7 @@ export class HomePage {
     prompt.present();
   }
 
-  updateRequest(reqID){
+  updateRequest(reqID) {
     let prompt = this.alertCtrl.create({
       title: 'Request',
       message: "Update this request",
@@ -117,7 +92,7 @@ export class HomePage {
     prompt.present();
   }
 
-  deleteRequest(songId: string){
+  deleteRequest(songId: string) {
     this.posts.remove(songId);
   }
 
@@ -130,13 +105,13 @@ export class HomePage {
           handler: () => {
             this.updateRequest(reqID);
           }
-        },{
+        }, {
           text: 'Delete',
           role: 'destructive',
           handler: () => {
             this.deleteRequest(reqID);
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
