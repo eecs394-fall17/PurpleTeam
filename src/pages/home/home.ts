@@ -100,32 +100,32 @@ export class HomePage {
     this.posts.remove(songId);
   }
 
-  // showOptions(reqID) {
-  //   let actionSheet = this.actionSheetCtrl.create({
-  //     title: 'What do you want to do?',
-  //     buttons: [
-  //       {
-  //         text: 'Update',
-  //         handler: () => {
-  //           this.updateRequest(reqID);
-  //         }
-  //       }, {
-  //         text: 'Delete',
-  //         role: 'destructive',
-  //         handler: () => {
-  //           this.deleteRequest(reqID);
-  //         }
-  //       }, {
-  //         text: 'Cancel',
-  //         role: 'cancel',
-  //         handler: () => {
-  //           console.log('Cancel clicked');
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   actionSheet.present();
-  // }
+  showOptions(reqID, reqDescription, reqValue) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'What do you want to do?',
+      buttons: [
+        {
+          text: 'Update',
+          handler: () => {
+            this.updateRequest(reqID, reqDescription, reqValue);
+          }
+        }, {
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => {
+            this.deleteRequest(reqID);
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 
   like(reqID) {
     let l = 0;

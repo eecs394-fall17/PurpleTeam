@@ -6,29 +6,47 @@
 
 <ion-content padding>
   <button ion-button block large (click)="addRequest()">New Post</button>
-  <ion-list ion-item *ngFor="let post of posts | async" no-lines>
+  <ion-list *ngFor="let post of posts | async" no-lines>
+    <!--<ion-item-sliding>-->
     <ion-card>
-      <ion-card-content text-wrap (click)="updateRequest(post.$key, post.description, post.value)">
-        <ion-card-title>Author<!-- TODO: author of post --></ion-card-title>
-        <div style="float:left">
+      <ion-card-content text-wrap padding>
+        <ion-card-title>Author<!-- TODO: author of post -->
+          <ion-item style="float:right; display:inline-block; width:20%">
+            <ion-icon name="ios-more" item-end (click)="showOptions(post.$key, post.description, post.value)"></ion-icon>
+          </ion-item>
+        </ion-card-title>
+
+        <div>
+        <div style="float:left; width:70%">
           <p>Posted {{howLongAgo(post.timestamp)}}</p>
-          <h1>{{post.description}}</h1>
+          <h2>{{post.description}}</h2>
+
         </div>
-        <div style="float:right">
+
+        <div style="float:right; width:30%; display:inline-block">
           <ion-item>
-            <ion-icon name='ios-thumbs-up' item-start (click)="like(post.$key)" style="color: #d03e84"></ion-icon>
-            <ion-badge>{{post.likes}}</ion-badge>
+            <ion-icon name='ios-thumbs-up' item-end (click)="like(post.$key)" style="color: #d03e84"></ion-icon>
+            <ion-badge item-end>{{post.likes}}</ion-badge>
 
           </ion-item>
           <ion-item>
-            <ion-icon name='logo-usd' item-start (click)="updateRequest(post.$key, post.description, post.value)"
+            <ion-icon name='logo-usd' item-end (click)="updateRequest(post.$key, post.description, post.value)"
                       style="color: #55acee"></ion-icon>
-            <ion-badge>{{post.value}}</ion-badge>
+            <ion-badge item-end>{{post.value}}</ion-badge>
           </ion-item>
         </div>
+        </div>
+
       </ion-card-content>
 
 
+
     </ion-card>
+      <!--<ion-item-options side="right">-->
+        <!--<button ion-button color="danger" icon-only (click)="deleteRequest(post.$key)">-->
+          <!--<ion-icon name="trash"></ion-icon>-->
+        <!--</button>-->
+      <!--</ion-item-options>-->
+    <!--</ion-item-sliding>-->
   </ion-list>
 </ion-content>
