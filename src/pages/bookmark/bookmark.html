@@ -6,7 +6,10 @@
 
 
 <ion-content padding>
-
-  <h3>Welcome to your first Ionic app!</h3>
-
+  <ion-list>
+    <button ion-button (click)="uploadPicture()">Upload Picture</button>
+  </ion-list>
+  <ion-list>
+    <img src="{{imageData}}">
+  </ion-list>
 </ion-content>
