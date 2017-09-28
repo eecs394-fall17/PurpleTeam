@@ -7,27 +7,31 @@ import {FileService} from "./file-service";
 
 @Injectable()
 export class FirebaseService {
-  root: string;
+  posts: string;
+  images: string;
+  videos: string;
 
   constructor(public afdb: AngularFireDatabase) {
-    this.root = "/posts/";
+    this.posts = "/posts/";
+    this.images = "/images/";
+    this.videos = "/videos/";
   }
 
   getPosts() {
-    return this.afdb.list(this.root);
+    return this.afdb.list(this.posts);
   }
 
   addPost(post) {
-    this.afdb.list(this.root).push(post);
+    this.afdb.list(this.posts).push(post);
   }
 
   removePost(id) {
-    this.afdb.list(this.root).remove(id);
+    this.afdb.list(this.posts).remove(id);
   }
 
   uploadImage(image, fileName) {
     return new Promise((resolve, reject) => {
-      let fileRef = firebase.storage().ref("/images/" + fileName);
+      let fileRef = firebase.storage().ref(this.images + fileName);
       let uploadTask = fileRef.putString(image, "data_url");
       uploadTask.on('state_changed', (snapshot) => {
         console.log('snapshot progress ' + snapshot);
@@ -37,6 +41,20 @@ export class FirebaseService {
         resolve(uploadTask.snapshot);
       })
     });
+  }
+
+  uploadVideo(video, fileName) {
+    return new Promise((resolve, reject) => {
+      let fileRef = firebase.storage().ref(this.videos + fileName);
+      let uploadTask = fileRef.putString(video, "data_url");
+      uploadTask.on('state_changed', (snapshot) => {
+        console.log('snapshot progress ' + snapshot);
+      }, (error) => {
+        reject(error);
+      }, () => {
+        resolve(uploadTask.snapshot);
+      })
+    })
   }
 
 }

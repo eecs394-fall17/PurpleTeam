@@ -17,6 +17,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FirebaseService } from "../providers/firebase-service";
 import { FileService } from "../providers/file-service";
+import {VideoPlayer} from "@ionic-native/video-player";
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -57,6 +58,7 @@ export const firebaseConfig = {
     FirebaseService,
     FileService,
     Camera,
+    VideoPlayer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
