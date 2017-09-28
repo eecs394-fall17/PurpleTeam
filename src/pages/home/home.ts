@@ -2,7 +2,8 @@ import {Component} from '@angular/core';
 import {FirebaseListObservable} from 'angularfire2/database';
 import {ActionSheetController, AlertController, NavController, NavParams} from 'ionic-angular';
 import {Post} from '../../app/Post';
-import {FirebaseService} from "../../providers/firebase-service";
+import {FirebaseService} from '../../providers/firebase-service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'page-home',
@@ -125,5 +126,9 @@ export class HomePage {
 
   like(reqID) {
     // this.posts.update(reqID, {likes: this.posts[reqID] + 1})
+  }
+
+  howLongAgo(timestamp) {
+    return moment(timestamp).fromNow();
   }
 }
