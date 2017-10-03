@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
 import { BookmarkPage } from "../pages/bookmark/bookmark";
+import { NewPostPage } from "../pages/new-post/new-post";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,7 +32,8 @@ import { AngularFireAuthModule } from "angularfire2/auth";
     HomePage,
     ItemDetailsPage,
     ListPage,
-    BookmarkPage
+    BookmarkPage,
+    NewPostPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { AngularFireAuthModule } from "angularfire2/auth";
     HomePage,
     ItemDetailsPage,
     ListPage,
-    BookmarkPage
+    BookmarkPage,
+    NewPostPage
   ],
   providers: [
     StatusBar,

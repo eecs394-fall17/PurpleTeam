@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {FirebaseListObservable} from 'angularfire2/database';
-import {ActionSheetController, AlertController, NavController, NavParams} from 'ionic-angular';
+import {ModalController, ActionSheetController, AlertController, NavController, NavParams} from 'ionic-angular';
 import {Post} from '../../models/post';
 import {FirebaseService} from '../../providers/firebase-service';
+import {NewPostPage} from "../new-post/new-post";
 import * as moment from 'moment';
 
 @Component({
@@ -16,8 +17,13 @@ export class HomePage {
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
               public actionSheetCtrl: ActionSheetController,
               public firebaseService: FirebaseService,
-              public navParams: NavParams) {
+              public navParams: NavParams, public modalCtrl: ModalController) {
     this.posts = this.firebaseService.getPosts();
+  }
+
+  openModal(data) {
+    let modal = this.modalCtrl.create(NewPostPage, data);
+    modal.present();
   }
 
   ionViewDidLoad() {
