@@ -19,11 +19,11 @@
 <ion-content>
   <ion-list padding-horizontal="5px">
     <ion-item>
-      <ion-textarea placeholder="Ask others to do it for You!"></ion-textarea>
+      <ion-textarea placeholder="Ask others to do it for You!" [(ngModel)]="post.description"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label>Points</ion-label>
-      <ion-input type="number" min="0" max="500" value="0"></ion-input>
+      <ion-input type="number" [(ngModel)]="post.value"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>

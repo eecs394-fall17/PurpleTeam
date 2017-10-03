@@ -19,28 +19,28 @@
         <ion-item>
           <ion-item>
             <ion-avatar item-start>
-              <img src="./assets/imgs/hathaway.jpg">
+              <img src="./assets/imgs/hepburn.jpg">
             </ion-avatar>
             <h2>Anne Hathaway</h2>
           </ion-item>
-          <img src="./assets/imgs/hepburn.jpg">
+          <!--<img src="./assets/imgs/hepburn.jpg">-->
           <ion-card-content>
             <p>{{post.description}}</p>
           </ion-card-content>
           <ion-row>
-            <ion-col>
+            <ion-col col-3>
               <button ion-button color="primary" clear small icon-start>
                 <ion-icon name='thumbs-up'></ion-icon>
                 {{post.likes}}
               </button>
             </ion-col>
-            <ion-col>
+            <ion-col col-3>
               <button ion-button color="primary" clear small icon-start>
                 <ion-icon name='logo-usd'></ion-icon>
                 {{post.value}}
               </button>
             </ion-col>
-            <ion-col align-self-center text-center>
+            <ion-col align-self-center text-center col-6>
               <ion-note>
                 {{howLongAgo(post.timestamp)}}
               </ion-note>
@@ -48,7 +48,7 @@
           </ion-row>
         </ion-item>
         <ion-item-options side="right">
-          <button ion-button color="danger" icon-only (click)="deleteRequest(post.$key)">
+          <button ion-button color="danger" icon-only (click)="removePost(post.$key)">
             <ion-icon name="trash"></ion-icon>
           </button>
         </ion-item-options>

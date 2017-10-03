@@ -4,10 +4,10 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ItemDetailsPage } from '../pages/item-details/item-details';
-import { ListPage } from '../pages/list/list';
 import { BookmarkPage } from "../pages/bookmark/bookmark";
 import { NewPostPage } from "../pages/new-post/new-post";
+import { LoginPage } from "../pages/login/login";
+import { RegisterPage } from "../pages/register/register";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,16 +22,14 @@ import { VideoPlayer } from "@ionic-native/video-player";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { FIREBASE_CONFIG } from "./app.firebase.config";
-import {LoginPage} from "../pages/login/login";
 import { AngularFireAuthModule } from "angularfire2/auth";
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
+    RegisterPage,
     HomePage,
-    ItemDetailsPage,
-    ListPage,
     BookmarkPage,
     NewPostPage
   ],
@@ -47,9 +45,8 @@ import { AngularFireAuthModule } from "angularfire2/auth";
   entryComponents: [
     MyApp,
     LoginPage,
+    RegisterPage,
     HomePage,
-    ItemDetailsPage,
-    ListPage,
     BookmarkPage,
     NewPostPage
   ],
