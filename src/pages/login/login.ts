@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import {User} from "../../models/user";
+import {RegisterPage} from "../register/register";
+import {HomePage} from "../home/home";
 
 import { AngularFireAuth } from "angularfire2/auth";
 
@@ -11,7 +13,6 @@ import { AngularFireAuth } from "angularfire2/auth";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -28,7 +29,7 @@ export class LoginPage {
       const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
       console.log(result);
       if (result) {
-        this.navCtrl.push('HomePage');
+        this.navCtrl.push(HomePage);
       }
     } catch (e) {
       console.error(e);
@@ -36,7 +37,7 @@ export class LoginPage {
   }
 
   register() {
-    this.navCtrl.push('RegisterPage');
+    this.navCtrl.push(RegisterPage);
   }
 
   ionViewDidLoad() {

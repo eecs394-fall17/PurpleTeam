@@ -7,9 +7,8 @@ export class Post {
   timestamp: string;
   authorKey: string;
   description: string;
-  // TODO images
   likes: number;
-  contributors: string[]; // contributor Ids
+  contributors: string[];
   value: number;
 
   constructor(public json: string) {
