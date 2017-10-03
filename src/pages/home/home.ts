@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FirebaseListObservable} from 'angularfire2/database';
 import {ActionSheetController, AlertController, NavController, NavParams} from 'ionic-angular';
-import {Post} from '../../app/Post';
+import {Post} from '../../models/post';
 import {FirebaseService} from '../../providers/firebase-service';
 import * as moment from 'moment';
 

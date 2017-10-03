@@ -5,7 +5,7 @@
 export class Post {
 
   timestamp: string;
-  authorId: string; // TODO users
+  authorKey: string;
   description: string;
   // TODO images
   likes: number;
@@ -15,11 +15,12 @@ export class Post {
   constructor(public json: string) {
 
     if (json) {
-      let parsed = JSON.parse(json);
-      this.description = parsed.description;
-      this.timestamp = parsed.timestamp;
-      this.likes = parsed.likes;
-      this.value = parsed.value;
+      let p = JSON.parse(json);
+      this.description = p.description;
+      this.timestamp = p.timestamp;
+      this.authorKey = p.authorKey;
+      this.likes = p.likes;
+      this.value = p.value;
     } else {
       this.description = "";
       this.timestamp = new Date().toString();

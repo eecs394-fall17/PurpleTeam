@@ -13,25 +13,21 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HttpModule } from "@angular/http";
 import { Camera } from "@ionic-native/camera";
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 import { FirebaseService } from "../providers/firebase-service";
 import { FileService } from "../providers/file-service";
-import {VideoPlayer} from "@ionic-native/video-player";
+import { VideoPlayer } from "@ionic-native/video-player";
 
-// AF2 Settings
-export const firebaseConfig = {
-  apiKey: "AIzaSyBiMNfzgXjYXu7aOOaUwY8bmd2JkdsprGo",
-  authDomain: "udoit-abb6f.firebaseapp.com",
-  databaseURL: "https://udoit-abb6f.firebaseio.com",
-  projectId: "udoit-abb6f",
-  storageBucket: "udoit-abb6f.appspot.com",
-  messagingSenderId: "235655215407"
-};
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+import { FIREBASE_CONFIG } from "./app.firebase.config";
+import {LoginPage} from "../pages/login/login";
+import { AngularFireAuthModule } from "angularfire2/auth";
 
 @NgModule({
   declarations: [
     MyApp,
+    LoginPage,
     HomePage,
     ItemDetailsPage,
     ListPage,
@@ -41,12 +37,14 @@ export const firebaseConfig = {
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(FIREBASE_CONFIG)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    LoginPage,
     HomePage,
     ItemDetailsPage,
     ListPage,
