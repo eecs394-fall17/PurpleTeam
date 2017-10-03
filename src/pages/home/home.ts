@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 import {FirebaseListObservable} from 'angularfire2/database';
-import {ModalController, ActionSheetController, AlertController, NavController, NavParams} from 'ionic-angular';
+import {ModalController, ActionSheetController, AlertController, NavController, NavParams, ToastController } from 'ionic-angular';
 import {Post} from '../../models/post';
 import {FirebaseService} from '../../providers/firebase-service';
 import {NewPostPage} from "../new-post/new-post";
+import {AngularFireAuth} from "angularfire2/auth";
 import * as moment from 'moment';
 
 @Component({
@@ -14,11 +15,31 @@ export class HomePage {
 
   posts: FirebaseListObservable<any[]>;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController,
+  constructor(private afAuth: AngularFireAuth, private toast: ToastController,
+              public navCtrl: NavController,
+              public alertCtrl: AlertController,
               public actionSheetCtrl: ActionSheetController,
               public firebaseService: FirebaseService,
               public navParams: NavParams, public modalCtrl: ModalController) {
+
+
     this.posts = this.firebaseService.getPosts();
+  }
+
+  ionViewWillLoad() {
+    this.afAuth.authState.subscribe(data => {
+      if (data && data.email && data.uid) {
+        this.toast.create({
+          message: `Welcome to APP_NAME, ${data.email}`,
+          duration: 3000
+        }).present();
+      } else {
+        this.toast.create({
+          message: `Could not find authentication details.`,
+          duration: 3000
+        }).present();
+      }
+    })
   }
 
   openModal(data) {
