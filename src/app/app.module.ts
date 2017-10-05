@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { BookmarkPage } from "../pages/bookmark/bookmark";
 import { NewPostPage } from "../pages/new-post/new-post";
+import { ProfilePage } from "../pages/profile/profile";
 import { LoginPage } from "../pages/login/login";
 import { RegisterPage } from "../pages/register/register";
 
@@ -27,6 +28,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 @NgModule({
   declarations: [
     MyApp,
+    ProfilePage,
     LoginPage,
     RegisterPage,
     HomePage,
@@ -44,6 +46,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    ProfilePage,
     LoginPage,
     RegisterPage,
     HomePage,

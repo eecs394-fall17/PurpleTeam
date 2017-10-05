@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { HomePage } from "../pages/home/home";
 import { BookmarkPage } from "../pages/bookmark/bookmark";
-import { LoginPage } from "../pages/login/login";
+import { ProfilePage } from "../pages/profile/profile";
 
 @Component({
-  templateUrl: 'app.html'})
+  templateUrl: 'app.html'
+})
 export class MyApp {
-  loginPage = LoginPage;
   homePage = HomePage;
   bookmarkPage = BookmarkPage;
+  profilePage = ProfilePage;
 }
