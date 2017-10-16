@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, ViewController} from 'ionic-angular';
 import {User} from "../../models/user";
 import {RegisterPage} from "../register/register";
 import {HomePage} from "../home/home";
@@ -21,7 +21,10 @@ export class LoginPage {
 
   user = {} as User;
 
-  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private afAuth: AngularFireAuth,
+              public navCtrl: NavController,
+              public viewController: ViewController,
+              public navParams: NavParams) {
   }
 
   async login(user: User) {
@@ -29,7 +32,7 @@ export class LoginPage {
       const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
       console.log(result);
       if (result) {
-        this.navCtrl.push(HomePage);
+        this.viewController.dismiss();
       }
     } catch (e) {
       console.error(e);

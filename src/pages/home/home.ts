@@ -14,31 +14,15 @@ export class HomePage {
 
   posts: FirebaseListObservable<any[]>;
 
-  constructor(private afAuth: AngularFireAuth, private toast: ToastController,
-              public navCtrl: NavController,
+  constructor(public navCtrl: NavController,
               public alertCtrl: AlertController,
               public actionSheetCtrl: ActionSheetController,
               public firebaseService: FirebaseService,
-              public navParams: NavParams, public modalCtrl: ModalController) {
+              public navParams: NavParams,
+              public modalCtrl: ModalController) {
 
 
     this.posts = this.firebaseService.getPosts();
-  }
-
-  ionViewWillLoad() {
-    this.afAuth.authState.subscribe(data => {
-      if (data && data.email && data.uid) {
-        this.toast.create({
-          message: `Welcome to APP_NAME, ${data.email}`,
-          duration: 3000
-        }).present();
-      } else {
-        this.toast.create({
-          message: `Could not find authentication details.`,
-          duration: 3000
-        }).present();
-      }
-    })
   }
 
   openModal(data) {
