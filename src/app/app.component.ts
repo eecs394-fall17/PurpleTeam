@@ -4,12 +4,15 @@ import { BookmarkPage } from "../pages/bookmark/bookmark";
 import { LoginPage } from "../pages/login/login";
 import {MenuController, ModalController, Nav, Platform} from "ionic-angular";
 import {SplashScreen} from "@ionic-native/splash-screen";
+import { ProfilePage } from "../pages/profile/profile";
 
 @Component({
-  templateUrl: 'app.html'})
+  templateUrl: 'app.html'
+})
 export class MyApp {
   homePage = HomePage;
   bookmarkPage = BookmarkPage;
+  profilePage = ProfilePage;
 
   @ViewChild(Nav) nav: Nav;
 

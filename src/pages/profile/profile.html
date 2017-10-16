@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{user.image}}">
+      </ion-avatar>
+      <h2>{{user.email}}</h2>
+      <p>{{user.quote}}</p>
+    </ion-item>
+    <ion-item *ngFor="let item of user['items']">
+      {{item.title}}
+      <ion-note item-end>
+        {{item.note}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          <button ion-button>Login</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button color="light">Register</button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

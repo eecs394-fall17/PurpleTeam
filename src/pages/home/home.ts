@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FirebaseListObservable} from 'angularfire2/database';
-import {ModalController, ActionSheetController, AlertController, NavController, NavParams, ToastController } from 'ionic-angular';
+import {ModalController, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import {FirebaseService} from '../../providers/firebase-service';
 import {NewPostPage} from "../new-post/new-post";
 import {AngularFireAuth} from "angularfire2/auth";
@@ -16,7 +16,6 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController,
-              public actionSheetCtrl: ActionSheetController,
               public firebaseService: FirebaseService,
               public navParams: NavParams,
               public modalCtrl: ModalController) {
