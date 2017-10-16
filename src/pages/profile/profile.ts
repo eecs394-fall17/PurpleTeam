@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
 import {AngularFireAuth} from "angularfire2/auth";
 import {User} from "../../models/user";
-import {NavController} from "ionic-angular";
+import {ModalController, NavController} from "ionic-angular";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'page-profile',
@@ -10,7 +11,9 @@ import {NavController} from "ionic-angular";
 export class ProfilePage {
   user: User;
 
-  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController) {
+  constructor(private afAuth: AngularFireAuth,
+              public navCtrl: NavController,
+              public modalController: ModalController) {
     this.user = {email: null, password: null};
   }
 
@@ -21,6 +24,12 @@ export class ProfilePage {
           this.user.email = data.email;
         }
       })
+    })
+  }
+
+  logout() {
+    this.afAuth.auth.signOut().then(_ => {
+      this.modalController.create(LoginPage).present();
     })
   }
 }
