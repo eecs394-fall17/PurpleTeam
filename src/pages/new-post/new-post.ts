@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {Platform, NavParams, ViewController} from "ionic-angular";
+import {Platform, NavParams, ViewController, AlertController} from "ionic-angular";
 import {FirebaseService} from "../../providers/firebase-service";
 import {Post} from "../../models/post";
 
@@ -13,11 +13,19 @@ export class NewPostPage {
   constructor(public platform: Platform,
               public params: NavParams,
               public viewCtrl: ViewController,
+              public alertCtrl: AlertController,
               public firebaseService: FirebaseService) {
     this.post = new Post("");
   }
 
   confirm() {
+    if (this.post.description.length == 0) {
+      this.presentAlert("No description!", "Please provide a description.");
+      return
+    } else if (!this.post.value || this.post.value == 0) {
+      this.presentAlert("No payment offered!", "Please offer a payment.");
+      return
+    }
     this.post.timestamp = new Date().toString();
     this.firebaseService.addPost(this.post);
     this.dismiss();
@@ -25,5 +33,14 @@ export class NewPostPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  presentAlert(title, message) {
+    const alert = this.alertCtrl.create({
+      title: title,
+      message: message,
+      buttons: ['Try again']
+    });
+    alert.present();
   }
 }

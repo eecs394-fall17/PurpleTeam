@@ -24,7 +24,6 @@ export class Post {
       this.description = "";
       this.timestamp = new Date().toString();
       this.likes = 0;
-      this.value = 0;
     }
   }
 
