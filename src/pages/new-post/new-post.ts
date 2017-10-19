@@ -30,6 +30,7 @@ export class NewPostPage {
     // TODO users table + attaching posts to users
     this.post.authorKey = firebase.auth().currentUser.uid;
     this.post.timestamp = new Date().toString();
+    this.post.username = firebase.auth().currentUser.email;
     this.firebaseService.addPost(this.post);
     this.dismiss();
   }

@@ -6,6 +6,7 @@ export class Post {
 
   timestamp: string;
   authorKey: string;
+  username: string;
   description: string;
   likes: number;
   contributors: string[];

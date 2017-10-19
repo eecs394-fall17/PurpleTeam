@@ -23,10 +23,6 @@ export class HomePage {
     this.posts = this.firebaseService.getPosts();
   }
 
-  getPostUsername(post) {
-    console.log(this.firebaseService.getUsername(post.authorKey));
-    return this.firebaseService.getUsername(post.authorKey);
-  }
 
   openModal(data) {
     let modal = this.modalCtrl.create(NewPostPage, data);

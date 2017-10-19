@@ -22,7 +22,7 @@ export class FirebaseService {
   }
 
   getUsername(id) {
-    this.afdb.list(this.users + id + '/');
+    return this.afdb.list(this.users + id + '/');
   }
 
   getPosts() {
