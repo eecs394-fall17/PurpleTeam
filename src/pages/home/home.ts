@@ -27,12 +27,36 @@ export class HomePage {
     return post.username === firebase.auth().currentUser.email;
   }
 
+  getUsername(post) {
+    return post.username.split('@')[0];
+  }
+
   clickPost(post) {
     if (this.belongsToMe(post)) {
       // edit my own post
-      this.openModal(post);
+      this.alertCtrl.create({
+        title: "Oops...",
+        message: "You can't accept your own request.",
+        buttons: ["Dismiss"]
+      }).present();
     } else {
       // accept request
+      this.alertCtrl.create({
+        title: "Accept Request?",
+        message: "Would you like to accept this request and notify the original poster?",
+        buttons: [
+          {
+            text: "No",
+            role: 'cancel',
+          },
+          {
+            text: "Yes",
+            handler: () => {
+              console.log("Accept Request!");
+            }
+          }
+        ]
+      }).present();
     }
   }
 
