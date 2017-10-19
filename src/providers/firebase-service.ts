@@ -8,11 +8,21 @@ export class FirebaseService {
   posts: string;
   images: string;
   videos: string;
+  users: string;
 
   constructor(public afdb: AngularFireDatabase) {
     this.posts = "/posts/";
+    this.users = "/users/";
     this.images = "/images/";
     this.videos = "/videos/";
+  }
+
+  addUsername(username, id) {
+    this.afdb.list(this.users + id + '/').push(username);
+  }
+
+  getUsername(id) {
+    this.afdb.list(this.users + id + '/');
   }
 
   getPosts() {

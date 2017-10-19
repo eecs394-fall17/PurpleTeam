@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {Platform, NavParams, ViewController, AlertController} from "ionic-angular";
 import {FirebaseService} from "../../providers/firebase-service";
 import {Post} from "../../models/post";
+import firebase from 'firebase';
 
 @Component({
   selector: 'page-new-post',
@@ -22,10 +23,12 @@ export class NewPostPage {
     if (this.post.description.length == 0) {
       this.presentAlert("No description!", "Please provide a description.");
       return
-    } else if (!this.post.value || this.post.value == 0) {
+    } else if (!this.post.value || this.post.value < 0.01) {
       this.presentAlert("No payment offered!", "Please offer a payment.");
       return
     }
+    // TODO users table + attaching posts to users
+    this.post.authorKey = firebase.auth().currentUser.uid;
     this.post.timestamp = new Date().toString();
     this.firebaseService.addPost(this.post);
     this.dismiss();
