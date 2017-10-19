@@ -47,7 +47,7 @@
             </ion-col>
           </ion-row>
         </ion-item>
-        <ion-item-options side="right">
+        <ion-item-options side="right" *ngIf="belongsToMe(post)">
           <button ion-button color="danger" icon-only (click)="removePost(post.$key)">
             <ion-icon name="trash"></ion-icon>
           </button>

@@ -17,8 +17,8 @@ export class NewPostPage {
               public viewCtrl: ViewController,
               public alertCtrl: AlertController,
               public firebaseService: FirebaseService) {
-    if (params) {
-      this.post = params.data;
+    if (this.params.get("description") != null) {
+      this.post = this.params.data;
       this.update = true;
     } else {
       this.post = new Post("");
@@ -38,6 +38,7 @@ export class NewPostPage {
     this.post.authorKey = firebase.auth().currentUser.uid;
     this.post.timestamp = new Date().toString();
     this.post.username = firebase.auth().currentUser.email;
+    console.log(this.post.username);
     if (this.update) {
       this.firebaseService.updatePost(this.post);
     } else {

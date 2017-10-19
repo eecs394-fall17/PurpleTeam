@@ -23,8 +23,12 @@ export class HomePage {
     this.posts = this.firebaseService.getPosts();
   }
 
+  belongsToMe(post) {
+    return post.username === firebase.auth().currentUser.email;
+  }
+
   clickPost(post) {
-    if (post.username === firebase.auth().currentUser.email) {
+    if (this.belongsToMe(post)) {
       // edit my own post
       this.openModal(post);
     } else {
