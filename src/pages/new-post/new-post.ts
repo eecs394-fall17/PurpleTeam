@@ -10,13 +10,20 @@ import firebase from 'firebase';
 })
 export class NewPostPage {
   post: Post;
+  update: boolean;
 
   constructor(public platform: Platform,
               public params: NavParams,
               public viewCtrl: ViewController,
               public alertCtrl: AlertController,
               public firebaseService: FirebaseService) {
-    this.post = new Post("");
+    if (params) {
+      this.post = params.data;
+      this.update = true;
+    } else {
+      this.post = new Post("");
+      this.update = false;
+    }
   }
 
   confirm() {
@@ -31,7 +38,11 @@ export class NewPostPage {
     this.post.authorKey = firebase.auth().currentUser.uid;
     this.post.timestamp = new Date().toString();
     this.post.username = firebase.auth().currentUser.email;
-    this.firebaseService.addPost(this.post);
+    if (this.update) {
+      this.firebaseService.updatePost(this.post);
+    } else {
+      this.firebaseService.addPost(this.post);
+    }
     this.dismiss();
   }
 

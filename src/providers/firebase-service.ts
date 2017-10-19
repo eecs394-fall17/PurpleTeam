@@ -33,6 +33,10 @@ export class FirebaseService {
     this.afdb.list(this.posts).push(post);
   }
 
+  updatePost(post) {
+    this.afdb.object(this.posts + post.$key).update({ description: post.description, value: post.value});
+  }
+
   removePost(id) {
     this.afdb.list(this.posts).remove(id);
   }

@@ -4,6 +4,7 @@ import {ModalController, NavController, NavParams, AlertController } from 'ionic
 import {FirebaseService} from '../../providers/firebase-service';
 import {NewPostPage} from "../new-post/new-post";
 import * as moment from 'moment';
+import firebase from 'firebase';
 
 @Component({
   selector: 'page-home',
@@ -19,10 +20,17 @@ export class HomePage {
               public navParams: NavParams,
               public modalCtrl: ModalController) {
 
-
     this.posts = this.firebaseService.getPosts();
   }
 
+  clickPost(post) {
+    if (post.username === firebase.auth().currentUser.email) {
+      // edit my own post
+      this.openModal(post);
+    } else {
+      // accept request
+    }
+  }
 
   openModal(data) {
     let modal = this.modalCtrl.create(NewPostPage, data);
