@@ -52,12 +52,16 @@ export class HomePage {
           {
             text: "Yes",
             handler: () => {
-              console.log("Accept Request!");
+              this.acceptRequest(post);
             }
           }
         ]
       }).present();
     }
+  }
+
+  acceptRequest(post) {
+    console.log("Accept Request", post);
   }
 
   openModal(data) {
