@@ -33,7 +33,9 @@ export class HomePage {
   }
 
   getUsername(post) {
-    return post.username.split('@')[0];
+    return post.username;
+    // console.log(post.authorKey);
+    // return this.firebaseService.getUsername(id);
   }
 
   clickPost(post) {
