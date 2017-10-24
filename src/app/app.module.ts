@@ -24,6 +24,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { FIREBASE_CONFIG } from "./app.firebase.config";
 import { AngularFireAuthModule } from "angularfire2/auth";
+import {SMS} from "@ionic-native/sms";
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
     FirebaseService,
     FileService,
     Camera,
+    SMS,
     VideoPlayer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]

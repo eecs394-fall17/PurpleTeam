@@ -5,6 +5,7 @@ import {FirebaseService} from '../../providers/firebase-service';
 import {NewPostPage} from "../new-post/new-post";
 import * as moment from 'moment';
 import firebase from 'firebase';
+import { SMS } from '@ionic-native/sms';
 
 @Component({
   selector: 'page-home',
@@ -18,7 +19,8 @@ export class HomePage {
               public alertCtrl: AlertController,
               public firebaseService: FirebaseService,
               public navParams: NavParams,
-              public modalCtrl: ModalController) {
+              public modalCtrl: ModalController,
+              private sms: SMS) {
 
     this.posts = this.firebaseService.getPosts();
   }
@@ -67,6 +69,7 @@ export class HomePage {
     post.likes += 1;
     this.firebaseService.updatePost(post);
     // text the poster!
+    this.sms.send('4805705969','Hello');
     console.log("Accept Request", post);
   }
 
