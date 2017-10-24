@@ -29,7 +29,9 @@ export class RegisterPage {
   async register(user: User) {
     try {
       const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
-      this.firebaseService.addUsername(user.username, firebase.auth().currentUser.uid);
+      console.log(this.user)
+      // this.firebaseService.addUsername(user.username, firebase.auth().currentUser.uid);
+      this.firebaseService.addUser(this.user);
       console.log(result);
     } catch (e) {
       console.error(e);

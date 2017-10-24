@@ -1,6 +1,7 @@
 import { AngularFireDatabase } from "angularfire2/database";
 import { Injectable } from "@angular/core";
 import * as firebase from 'firebase';
+import {User} from "../models/user";
 
 
 @Injectable()
@@ -17,8 +18,12 @@ export class FirebaseService {
     this.videos = "/videos/";
   }
 
-  addUsername(username, id) {
-    this.afdb.list(this.users + id + '/').push(username);
+  // addUsername(username, id) {
+  //   this.afdb.list(this.users + id + '/').push(username);
+  // }
+
+  addUser(user: User) {
+    this.afdb.list(this.users).push(user);
   }
 
   getUsername(id) {

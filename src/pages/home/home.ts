@@ -24,6 +24,9 @@ export class HomePage {
   }
 
   belongsToMe(post) {
+    if (firebase.auth().currentUser == null) {
+      return false
+    }
     return post.username === firebase.auth().currentUser.email;
   }
 

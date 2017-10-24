@@ -14,7 +14,7 @@ export class ProfilePage {
   constructor(private afAuth: AngularFireAuth,
               public navCtrl: NavController,
               public modalController: ModalController) {
-    this.user = {username: null, email: null, password: null};
+    this.user = {username: null, email: null, password: null, phone: null};
   }
 
   ionViewWillLoad() {
