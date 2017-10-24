@@ -64,6 +64,9 @@ export class HomePage {
   }
 
   acceptRequest(post) {
+    post.likes += 1;
+    this.firebaseService.updatePost(post);
+    // text the poster!
     console.log("Accept Request", post);
   }
 
