@@ -73,7 +73,23 @@ export class HomePage {
   }
 
   removePost(songId: string) {
-    this.firebaseService.removePost(songId);
+    this.alertCtrl.create({
+      title: "Delete Post",
+      message: "Are you sure you want to delete this post? This action cannot be undone.",
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.firebaseService.removePost(songId);
+          }
+        }
+      ]
+    }).present();
+
   }
 
   like(reqID) {
