@@ -2,7 +2,7 @@ EECS 394 Fall 2017
 
 Purple Team
 
-Members: Eric Hao, Libin Song
+Member: Eric Hao
 
 
 This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
