@@ -30,8 +30,11 @@ export class HomePage {
     return post.username === firebase.auth().currentUser.email;
   }
 
-  getUsername(post) {
-    return post.username.split('@')[0];
+  getUsername(id) {
+    // console.log(post.authorKey);
+    let a = this.firebaseService.getUsername(id, (u) => {
+      return u.username;
+    });
   }
 
   clickPost(post) {
