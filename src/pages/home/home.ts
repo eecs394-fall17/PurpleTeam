@@ -29,7 +29,7 @@ export class HomePage {
     if (firebase.auth().currentUser == null) {
       return false
     }
-    return post.username === firebase.auth().currentUser.email;
+    return post.authorKey === firebase.auth().currentUser.uid;
   }
 
   getUsername(post) {
