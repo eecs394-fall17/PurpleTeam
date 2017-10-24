@@ -1,4 +1,4 @@
-import { AngularFireDatabase } from "angularfire2/database";
+import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 import { Injectable } from "@angular/core";
 import * as firebase from 'firebase';
 import {User} from "../models/user";
@@ -51,7 +51,7 @@ export class FirebaseService {
   }
 
   getPosts() {
-    return this.afdb.list(this.posts);
+    return this.afdb.list(this.posts).map(items => items.reverse()) as FirebaseListObservable<any[]>;
   }
 
   addPost(post) {

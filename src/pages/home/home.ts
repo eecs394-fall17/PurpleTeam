@@ -6,6 +6,7 @@ import {NewPostPage} from "../new-post/new-post";
 import * as moment from 'moment';
 import firebase from 'firebase';
 import { SMS } from '@ionic-native/sms';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'page-home',
