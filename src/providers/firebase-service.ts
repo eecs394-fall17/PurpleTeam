@@ -27,13 +27,15 @@ export class FirebaseService {
     this.afdb.list(this.users).push(user);
   }
 
-  getUsername(id, cb) {
+  getUsername(id) {
     firebase.database().ref(this.users).once("value").then(snapshot => {
       // console.log((<any>Object).values(snapshot.val()));
       (<any>Object).values(snapshot.val()).forEach(u => {
         // console.log(u);
         if (u.id == id) {
-          cb(u);
+          return new Promise((resolve, reject) => {
+            resolve(u.username);
+          })
         }
       })
     })
