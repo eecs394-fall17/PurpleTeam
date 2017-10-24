@@ -14,7 +14,7 @@
     </button>
   </ion-fab>
   <ion-list no-lines>
-    <ion-card *ngFor="let post of posts | async" text-wrap (click)="clickPost(post)">
+    <ion-card *ngFor="let post of posts | async" text-wrap>
       <ion-item-sliding>
         <ion-item>
           <ion-item>
@@ -44,6 +44,14 @@
               <ion-note>
                 {{howLongAgo(post.timestamp)}}
               </ion-note>
+            </ion-col>
+
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button full color="primary" (click)="clickPost(post)">
+                {{belongsToMe(post) ? "Mark Complete" : "Accept Request"}}
+              </button>
             </ion-col>
           </ion-row>
         </ion-item>
