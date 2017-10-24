@@ -27,26 +27,24 @@ export class FirebaseService {
     this.afdb.list(this.users).push(user);
   }
 
-  getUsername(id) {
+  getUsername(id, cb) {
     firebase.database().ref(this.users).once("value").then(snapshot => {
       // console.log((<any>Object).values(snapshot.val()));
       (<any>Object).values(snapshot.val()).forEach(u => {
         // console.log(u);
         if (u.id == id) {
-          return new Promise((resolve, reject) => {
-            resolve(u.username);
-          })
+          cb(u.username);
         }
       })
     })
   }
 
-  getUserPhone(id) {
+  getUserPhone(id, cb) {
     firebase.database().ref(this.users).once("value").then(snapshot => {
       // console.log(snapshot.val());
-      snapshot.forEach(u => {
+      (<any>Object).values(snapshot.val()).forEach(u => {
         if (u.id == id) {
-          return u.phone;
+          cb(u.phone);
         }
       })
     })

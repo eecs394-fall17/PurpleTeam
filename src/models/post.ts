@@ -11,6 +11,7 @@ export class Post {
   likes: number;
   contributors: string[];
   value: number;
+  phone: string;
 
   constructor(public json: string) {
 

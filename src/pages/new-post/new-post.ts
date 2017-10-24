@@ -36,14 +36,19 @@ export class NewPostPage {
     }
     // TODO users table + attaching posts to users
     this.post.authorKey = firebase.auth().currentUser.uid;
-    this.post.timestamp = new Date().toString();
-    this.post.username = firebase.auth().currentUser.email;
-    console.log(this.post.username);
-    if (this.update) {
-      this.firebaseService.updatePost(this.post);
-    } else {
-      this.firebaseService.addPost(this.post);
-    }
+    let self = this;
+    this.firebaseService.getUsername(this.post.authorKey, username => {
+      self.firebaseService.getUserPhone(self.post.authorKey, phone => {
+        self.post.timestamp = new Date().toString();
+        self.post.username = username;
+        self.post.phone = phone;
+        if (self.update) {
+          self.firebaseService.updatePost(self.post);
+        } else {
+          self.firebaseService.addPost(self.post);
+        }
+      });
+    });
     this.dismiss();
   }
 
