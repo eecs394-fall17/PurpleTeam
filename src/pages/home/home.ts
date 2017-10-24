@@ -71,8 +71,10 @@ export class HomePage {
     post.likes += 1;
     this.firebaseService.updatePost(post);
     // text the poster!
-    this.sms.send('4805705969','Hello');
-    console.log("Accept Request", post);
+    let text = 'I would like to accept your request:\n' +
+      (post.description.length >= 35 ? post.description.slice(0,30) + '...' : post.description)
+    console.log(text);
+    this.sms.send('4805705969', text);
   }
 
   openModal(data) {
