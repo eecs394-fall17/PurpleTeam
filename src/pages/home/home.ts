@@ -43,9 +43,20 @@ export class HomePage {
     if (this.belongsToMe(post)) {
       // edit my own post
       this.alertCtrl.create({
-        title: "Oops...",
-        message: "You can't accept your own request.",
-        buttons: ["Dismiss"]
+        title: "Mark Complete?",
+        message: "Would you like to mark this request as complete?",
+        buttons: [
+          {
+            text: "No",
+            role: 'cancel',
+          },
+          {
+            text: "Yes",
+            handler: () => {
+              this.firebaseService.removePost(post.$key);
+            }
+          }
+        ]
       }).present();
     } else {
       // accept request
@@ -83,7 +94,7 @@ export class HomePage {
     modal.present();
   }
 
-  removePost(songId: string) {
+  removePost(postID: string) {
     this.alertCtrl.create({
       title: "Delete Post",
       message: "Are you sure you want to delete this post? This action cannot be undone.",
@@ -95,7 +106,7 @@ export class HomePage {
         {
           text: 'Delete',
           handler: () => {
-            this.firebaseService.removePost(songId);
+            this.firebaseService.removePost(postID);
           }
         }
       ]
