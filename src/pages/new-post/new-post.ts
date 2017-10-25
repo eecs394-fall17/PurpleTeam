@@ -40,6 +40,7 @@ export class NewPostPage {
     this.firebaseService.getUsername(this.post.authorKey, username => {
       self.firebaseService.getUserPhone(self.post.authorKey, phone => {
         self.post.timestamp = new Date().toString();
+        self.post.order = -(new Date().getTime());
         self.post.username = username;
         self.post.phone = phone;
         if (self.update) {

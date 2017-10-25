@@ -51,7 +51,12 @@ export class FirebaseService {
   }
 
   getPosts() {
-    return this.afdb.list(this.posts).map(items => items.reverse()) as FirebaseListObservable<any[]>;
+    // return this.afdb.list(this.posts).map(items => items.reverse()) as FirebaseListObservable<any[]>;
+    return this.afdb.list(this.posts, {
+      query: {
+        orderByChild: 'order'
+      }
+    })
   }
 
   addPost(post) {

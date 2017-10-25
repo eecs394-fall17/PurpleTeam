@@ -12,6 +12,7 @@ export class Post {
   contributors: string[];
   value: number;
   phone: string;
+  order: number;
 
   constructor(public json: string) {
 
